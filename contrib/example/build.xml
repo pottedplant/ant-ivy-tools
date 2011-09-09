@@ -42,6 +42,8 @@
 		<ivy:settings file="ivysettings.xml" />
 		<ivy:retrieve file="ivy.xml" />
 
+		<static:store settings="ivysettings.xml" input="ivy.xml" output="project.classpath" />
+
 		<eclipse:classpath >
 
 			<entry kind="src" path="src" output="bin" />
@@ -50,8 +52,6 @@
 			<ivy settings="ivysettings.xml" input="ivy.xml" />
 
 		</eclipse:classpath>
-
-		<static:store settings="ivysettings.xml" input="ivy.xml" output="project.classpath" />
 
 	</target>
 
