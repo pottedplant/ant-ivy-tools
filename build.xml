@@ -14,6 +14,13 @@
 		</javac>
 	</target>
 
+	<target name="jar" depends="compile">
+		<jar destfile="${build.dir}/ant-ivy-tools.jar">
+			<fileset dir="${build.dir.classes}" />
+			<fileset dir="${src.dir}" />
+		</jar>
+	</target>
+
 	<target name="clean">
 		<delete dir="${build.dir}" />
 	</target>

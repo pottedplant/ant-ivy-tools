@@ -112,10 +112,6 @@ public class GenerateClasspath extends Task {
 			this.path = path;
 		}
 		
-		public void setOutput(String output) {
-			this.output = output;
-		}
-		
 	}
 	
 	// stupido
