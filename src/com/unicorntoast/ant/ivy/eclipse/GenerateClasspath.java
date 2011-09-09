@@ -23,7 +23,7 @@ public class GenerateClasspath extends Task {
 	public void execute() throws BuildException {
 		
 		if( basedir==null )
-			basedir=getProject().getBaseDir().getAbsolutePath();
+			basedir=String.format("%s/",getProject().getBaseDir().getAbsolutePath());
 		
 		try {
 			
@@ -98,7 +98,7 @@ public class GenerateClasspath extends Task {
 
 		@Override
 		public void write(PrintStream out) throws IOException {
-			out.append("<classpathentry");
+			out.append("  <classpathentry");
 			
 			writeAttribute(out,"kind",kind);
 			writeAttribute(out,"path",path);

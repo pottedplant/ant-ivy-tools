@@ -12,18 +12,17 @@ public abstract class EclipseUtils {
 		PrintStream ps = new PrintStream(new FileOutputStream(output));
 		try {
 			
-			ps.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-			ps.println("<classpath>");
+			ps.print("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
+			ps.print("<classpath>\n");
 			
 			for(StreamContributor c : classpath)
 				c.write(ps);
 			
-			ps.println("</classpath>\n");
+			ps.print("</classpath>\n");
 			
 		} finally {
 			ps.close();
 		}
-		ps.close();
 
 	}
 
