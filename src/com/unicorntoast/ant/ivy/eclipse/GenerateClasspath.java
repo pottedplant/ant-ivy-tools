@@ -9,6 +9,9 @@ import java.util.List;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Task;
 
+import com.unicorntoast.ant.ivy.utils.IvyUtils;
+import com.unicorntoast.ant.ivy.utils.IvySettingsUtils;
+
 public class GenerateClasspath extends Task {
 	
 	// state
@@ -59,7 +62,7 @@ public class GenerateClasspath extends Task {
 						basedir,
 						IvyUtils.resolve(
 							IvyUtils.create(
-								SettingsUtils.load(settings)
+								IvySettingsUtils.load(settings)
 							),
 							input
 						)

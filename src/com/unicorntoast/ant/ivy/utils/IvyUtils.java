@@ -1,4 +1,4 @@
-package com.unicorntoast.ant.ivy.eclipse;
+package com.unicorntoast.ant.ivy.utils;
 
 import java.io.File;
 import java.io.IOException;

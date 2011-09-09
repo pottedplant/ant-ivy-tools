@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<antlib>
+	<taskdef name="store" classname="com.unicorntoast.ant.ivy.static_classpath.StoreClasspath" />
+	<taskdef name="load" classname="com.unicorntoast.ant.ivy.static_classpath.LoadClasspath" />
+</antlib>
+
