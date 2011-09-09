@@ -1,0 +1,4 @@
+ * be sure contrib/ant-ivy-tools.jar exists (points to an existing jar) - this should be the case if you build the main project
+ * run "ant update-deps" - to fetch deps, create eclipse classpath and project.classpath
+ * run "ant compile" - to build project
+

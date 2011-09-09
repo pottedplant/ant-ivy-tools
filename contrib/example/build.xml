@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project 
+	xmlns:ivy="antlib:org.apache.ivy.ant"
+	xmlns:eclipse="antlib:com.unicorntoast.ant.ivy.eclipse" 
+	xmlns:static="antlib:com.unicorntoast.ant.ivy.static_classpath" 
+	default="help"
+	>
+
+	<taskdef uri="antlib:com.unicorntoast.ant.ivy.eclipse" classpath="contrib/ant-ivy-tools.jar" /> 
+	<taskdef uri="antlib:com.unicorntoast.ant.ivy.static_classpath" classpath="contrib/ant-ivy-tools.jar" /> 
+	
+
+	<target name="help">
+		<echo>important: ensure contrib/ant-ivy-tools.jar exists</echo>
+		<echo>important: before first compile, execute "ant update-deps"</echo>
+		<echo />
+		
+		<echo>update-deps - fetch dependencies (ivy) and create necessary files ( .classpath, project.classpath )</echo>
+		<echo>compile</echo>
+		<echo>clean</echo>
+		<echo />
+		
+	</target>
+
+	<target name="clean">
+		<delete dir="bin" />
+	</target>
+
+	<target name="compile">
+
+		<mkdir dir="bin" />
+
+		<static:load input="project.classpath" refid="classpath" />
+		<javac srcdir="src" destdir="bin" includeantruntime="false">
+			<classpath refid="classpath" />
+		</javac>
+
+	</target>
+
+	<target  name="update-deps">
+
+		<ivy:settings file="ivysettings.xml" />
+		<ivy:resolve file="ivy.xml" />
+
+		<eclipse:classpath >
+
+			<entry kind="src" path="src" output="bin" />
+			<entry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6" />
+
+			<ivy settings="ivysettings.xml" input="ivy.xml" />
+
+		</eclipse:classpath>
+
+		<static:store settings="ivysettings.xml" input="ivy.xml" output="project.classpath" />
+
+	</target>
+
+</project>
+
