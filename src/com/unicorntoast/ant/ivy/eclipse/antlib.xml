@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
 <antlib>
-	<taskdef name="classpath" class="com.unicorntoast.ant.ivy.eclipse.GenerateClasspath" />
+	<taskdef name="classpath" classname="com.unicorntoast.ant.ivy.eclipse.GenerateClasspath" />
 </antlib>
 

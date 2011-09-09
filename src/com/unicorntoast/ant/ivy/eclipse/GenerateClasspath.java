@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Task;
@@ -12,13 +13,17 @@ public class GenerateClasspath extends Task {
 	
 	// state
 	
-	private String output;
+	private String output = ".classpath";
+	private String basedir;
 	private ArrayList<StreamContributor> contributors = new ArrayList<StreamContributor>();
 	
 	// impl
 	
 	@Override
 	public void execute() throws BuildException {
+		
+		if( basedir==null )
+			basedir=getProject().getBaseDir().getAbsolutePath();
 		
 		try {
 			
@@ -50,8 +55,8 @@ public class GenerateClasspath extends Task {
 		public void write(PrintStream out) throws IOException {
 			
 			try {
-				ClasspathUtils.build(
-						getProject().getBaseDir().getAbsolutePath(),
+				List<IvyPackageClasspathEntry> classpath = ClasspathUtils.build(
+						basedir,
 						IvyUtils.resolve(
 							IvyUtils.create(
 								SettingsUtils.load(settings)
@@ -59,6 +64,10 @@ public class GenerateClasspath extends Task {
 							input
 						)
 					);
+				
+				for(IvyPackageClasspathEntry e : classpath)
+					e.write(out);
+					
 			} catch(ParseException e) {
 				throw new RuntimeException(String.format("ivy: settings='%s' input='%s'",settings,input),e);
 			}
@@ -95,7 +104,7 @@ public class GenerateClasspath extends Task {
 			writeAttribute(out,"path",path);
 			writeAttribute(out,"output",output);
 			
-			out.append("/>");
+			out.append("/>\n");
 		}
 
 		private void writeAttribute(PrintStream out, String name, String value) {
@@ -112,6 +121,10 @@ public class GenerateClasspath extends Task {
 			this.path = path;
 		}
 		
+		public void setOutput(String output) {
+			this.output = output;
+		}
+		
 	}
 	
 	// stupido
@@ -120,4 +133,8 @@ public class GenerateClasspath extends Task {
 		this.output = output;
 	}
 
+	public void setBasedir(String basedir) {
+		this.basedir = basedir;
+	}
+	
 }
