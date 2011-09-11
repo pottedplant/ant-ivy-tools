@@ -9,9 +9,9 @@
 
 	<taskdef uri="antlib:com.unicorntoast.ant.ivy.eclipse" classpath="${ant_ivy_tools_classpath}" /> 
 	<taskdef uri="antlib:com.unicorntoast.ant.ivy.static_classpath" classpath="${ant_ivy_tools_classpath}" /> 
-	
 
 	<target name="help">
+
 		<echo>important: ensure contrib/ant-ivy-tools.jar exists</echo>
 		<echo>important: before first compile, execute "ant update-deps"</echo>
 		<echo />
