@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project 
-	xmlns:ivy="antlib:org.apache.ivy.ant"
 	xmlns:eclipse="antlib:com.unicorntoast.ant.ivy.eclipse" 
 	xmlns:static="antlib:com.unicorntoast.ant.ivy.static_classpath" 
 	default="help"
 	>
 
-	<taskdef uri="antlib:com.unicorntoast.ant.ivy.eclipse" classpath="contrib/ant-ivy-tools.jar" /> 
-	<taskdef uri="antlib:com.unicorntoast.ant.ivy.static_classpath" classpath="contrib/ant-ivy-tools.jar" /> 
+	<property name="ant_ivy_tools_classpath" value="contrib/ivy-2.2.0.jar:contrib/ant-ivy-tools.jar" />
+
+	<taskdef uri="antlib:com.unicorntoast.ant.ivy.eclipse" classpath="${ant_ivy_tools_classpath}" /> 
+	<taskdef uri="antlib:com.unicorntoast.ant.ivy.static_classpath" classpath="${ant_ivy_tools_classpath}" /> 
 	
 
 	<target name="help">
@@ -38,9 +39,6 @@
 	</target>
 
 	<target  name="update-deps">
-
-		<ivy:settings file="ivysettings.xml" />
-		<ivy:resolve file="ivy.xml" />
 
 		<static:store settings="ivysettings.xml" input="ivy.xml" output="project.classpath" />
 
