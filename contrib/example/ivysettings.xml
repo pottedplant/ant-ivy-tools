@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <ivysettings>
 
-	<settings defaultResolver="default" />
+	<settings defaultResolver="default" defaultCache="${ivy.settings.dir}/cache" />
 
 	<resolvers>
 
