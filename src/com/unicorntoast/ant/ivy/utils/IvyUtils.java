@@ -10,8 +10,18 @@ import org.apache.ivy.core.settings.IvySettings;
 
 public abstract class IvyUtils {
 	
+	public static Ivy create(String settings) throws ParseException, IOException {
+		if( settings!=null )
+			return create(IvySettingsUtils.load(settings));
+		return create();
+	}
+	
 	public static Ivy create(IvySettings settings) {
 		return Ivy.newInstance(settings);
+	}
+	
+	public static Ivy create() {
+		return Ivy.newInstance();
 	}
 
 	public static ResolveReport resolve(Ivy ivy, String file) throws ParseException, IOException {

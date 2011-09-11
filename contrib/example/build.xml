@@ -40,7 +40,7 @@
 	<target  name="update-deps">
 
 		<ivy:settings file="ivysettings.xml" />
-		<ivy:retrieve file="ivy.xml" />
+		<ivy:resolve file="ivy.xml" />
 
 		<static:store settings="ivysettings.xml" input="ivy.xml" output="project.classpath" />
 

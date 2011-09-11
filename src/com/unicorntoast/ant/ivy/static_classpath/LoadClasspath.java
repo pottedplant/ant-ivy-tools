@@ -8,15 +8,20 @@ import org.apache.tools.ant.Project;
 import org.apache.tools.ant.Task;
 import org.apache.tools.ant.types.Path;
 
+import com.unicorntoast.ant.ivy.utils.Validate;
+
 public class LoadClasspath extends Task {
 	
-	private String input;
-	private String refid;
+	private String input = Default.DEFAULT_CLASSPATH_FILE;
+	private String refid = Default.DEFAULT_PATH_REFID;
 	
 	// impl
 	
 	@Override
 	public void execute() throws BuildException {
+		
+		Validate.notEmpty(input, "input attribute reqired");
+		Validate.notEmpty(refid, "refid attribute reqired");
 		
 		Project project = getProject();
 		Path path = new Path(project);

@@ -8,13 +8,14 @@ import org.apache.tools.ant.Task;
 
 import com.unicorntoast.ant.ivy.utils.IvySettingsUtils;
 import com.unicorntoast.ant.ivy.utils.IvyUtils;
+import com.unicorntoast.ant.ivy.utils.Validate;
 
 public class StoreClasspath extends Task {
 	
 	private String basepath;
 	private String settings;
 	private String input;
-	private String output;
+	private String output = Default.DEFAULT_CLASSPATH_FILE;
 	
 	// impl
 	
@@ -23,6 +24,10 @@ public class StoreClasspath extends Task {
 		
 		if( basepath==null )
 			basepath = getProject().getBaseDir().getAbsolutePath() + "/";
+		
+		Validate.notEmpty(basepath, "basepath is empty");
+		Validate.notEmpty(input, "input attribute required");
+		Validate.notEmpty(output, "output attribute required");
 		
 		try {
 			

@@ -11,6 +11,7 @@ import org.apache.tools.ant.Task;
 
 import com.unicorntoast.ant.ivy.utils.IvyUtils;
 import com.unicorntoast.ant.ivy.utils.IvySettingsUtils;
+import com.unicorntoast.ant.ivy.utils.Validate;
 
 public class GenerateClasspath extends Task {
 	
@@ -24,6 +25,8 @@ public class GenerateClasspath extends Task {
 	
 	@Override
 	public void execute() throws BuildException {
+		
+		Validate.notEmpty(output, "output attribute required");
 		
 		if( basedir==null )
 			basedir=String.format("%s/",getProject().getBaseDir().getAbsolutePath());
