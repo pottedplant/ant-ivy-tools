@@ -6,6 +6,7 @@ import java.text.ParseException;
 
 import org.apache.ivy.Ivy;
 import org.apache.ivy.core.report.ResolveReport;
+import org.apache.ivy.core.resolve.ResolveOptions;
 import org.apache.ivy.core.settings.IvySettings;
 
 public abstract class IvyUtils {
@@ -24,8 +25,14 @@ public abstract class IvyUtils {
 		return Ivy.newInstance();
 	}
 
-	public static ResolveReport resolve(Ivy ivy, String file) throws ParseException, IOException {
-		ResolveReport report = ivy.resolve(new File(file));
+	public static ResolveReport resolve(Ivy ivy, String file, String conf) throws ParseException, IOException {
+		
+		ResolveOptions opts = new ResolveOptions();
+		
+		if( conf!=null )
+			opts.setConfs(conf.split(","));
+		
+		ResolveReport report = ivy.resolve(new File(file).toURI().toURL(),opts);
 		
 		if( report.hasError() )
 			throw new RuntimeException(errorMessage(report));

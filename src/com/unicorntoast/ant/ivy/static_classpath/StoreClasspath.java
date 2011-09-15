@@ -16,6 +16,7 @@ public class StoreClasspath extends Task {
 	private String settings;
 	private String input;
 	private String output = Default.DEFAULT_CLASSPATH_FILE;
+	private String conf;
 	
 	// impl
 	
@@ -37,7 +38,8 @@ public class StoreClasspath extends Task {
 					IvyUtils.create(
 						IvySettingsUtils.load(settings)
 					),
-					input
+					input,
+					conf
 				),
 				output
 			);
@@ -67,6 +69,10 @@ public class StoreClasspath extends Task {
 	
 	public void setBasepath(String basepath) {
 		this.basepath = basepath;
+	}
+	
+	public void setConf(String conf) {
+		this.conf = conf;
 	}
 
 }

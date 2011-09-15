@@ -9,8 +9,8 @@ import java.util.List;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Task;
 
-import com.unicorntoast.ant.ivy.utils.IvyUtils;
 import com.unicorntoast.ant.ivy.utils.IvySettingsUtils;
+import com.unicorntoast.ant.ivy.utils.IvyUtils;
 import com.unicorntoast.ant.ivy.utils.Validate;
 
 public class GenerateClasspath extends Task {
@@ -19,6 +19,7 @@ public class GenerateClasspath extends Task {
 	
 	private String output = ".classpath";
 	private String basedir;
+	private String conf;
 	private ArrayList<StreamContributor> contributors = new ArrayList<StreamContributor>();
 	
 	// impl
@@ -67,7 +68,8 @@ public class GenerateClasspath extends Task {
 							IvyUtils.create(
 								IvySettingsUtils.load(settings)
 							),
-							input
+							input,
+							conf
 						)
 					);
 				
@@ -141,6 +143,10 @@ public class GenerateClasspath extends Task {
 
 	public void setBasedir(String basedir) {
 		this.basedir = basedir;
+	}
+	
+	public void setConf(String conf) {
+		this.conf = conf;
 	}
 	
 }
