@@ -12,6 +12,7 @@ import org.apache.ivy.core.report.ResolveReport;
 public abstract class ClasspathUtils {
 
 	private static final String TYPE_JAR = "jar";
+	private static final String TYPE_BUNDLE = "bundle";
 	private static final String ATTR_ORGANISATION = "organisation";
 
 	public static List<IvyPackageClasspathEntry> build(String basepath,ResolveReport report) {
@@ -25,7 +26,7 @@ public abstract class ClasspathUtils {
 			String name = a.getName();
 			String organisation = a.getAttribute(ATTR_ORGANISATION);
 			
-			if( TYPE_JAR.equals(a.getType())) {
+			if( TYPE_JAR.equals(a.getType()) || TYPE_BUNDLE.equals(a.getType()) ) {
 				IvyPackageKey packageKey = new IvyPackageKey(organisation,name);
 				IvyPackage ivyPackage = get(packages,packageKey);
 				ivyPackage.jar = r;
