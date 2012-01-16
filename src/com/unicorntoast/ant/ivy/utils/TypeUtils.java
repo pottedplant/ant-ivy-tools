@@ -7,7 +7,7 @@ public abstract class TypeUtils {
 	public static final String TYPE_JAR = "jar";
 	public static final String TYPE_BUNDLE = "bundle";
 	public static final String TYPE_SRC = "src";
-	public static final String TYPE_SOURCE = "src";
+	public static final String TYPE_SOURCE = "source";
 	public static final String TYPE_JAVADOC = "javadoc";
 
 	public static boolean jar(Artifact a) {
