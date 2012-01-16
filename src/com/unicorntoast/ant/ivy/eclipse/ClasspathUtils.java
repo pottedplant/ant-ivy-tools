@@ -9,10 +9,10 @@ import org.apache.ivy.core.module.descriptor.Artifact;
 import org.apache.ivy.core.report.ArtifactDownloadReport;
 import org.apache.ivy.core.report.ResolveReport;
 
+import com.unicorntoast.ant.ivy.utils.TypeUtils;
+
 public abstract class ClasspathUtils {
 
-	private static final String TYPE_JAR = "jar";
-	private static final String TYPE_BUNDLE = "bundle";
 	private static final String ATTR_ORGANISATION = "organisation";
 
 	public static List<IvyPackageClasspathEntry> build(String basepath,ResolveReport report) {
@@ -26,26 +26,27 @@ public abstract class ClasspathUtils {
 			String name = a.getName();
 			String organisation = a.getAttribute(ATTR_ORGANISATION);
 			
-			if( TYPE_JAR.equals(a.getType()) || TYPE_BUNDLE.equals(a.getType()) ) {
+			if( TypeUtils.jar(a) ) {
+				
 				IvyPackageKey packageKey = new IvyPackageKey(organisation,name);
 				IvyPackage ivyPackage = get(packages,packageKey);
 				ivyPackage.jar = r;
 				result.add(new IvyPackageClasspathEntry(basepath,ivyPackage));
-			} else if( "src".equals(a.getType()) ) {
+				
+			} else if( TypeUtils.source(a) ) {
+				
 				if(name.endsWith("-sources"))
 					name = name.substring(0,name.length()-"-sources".length());
 				IvyPackageKey packageKey = new IvyPackageKey(organisation,name);
 				get(packages,packageKey).sources=r;
-			} else if( "source".equals(a.getType()) ) {
-				if(name.endsWith("-sources"))
-					name = name.substring(0,name.length()-"-sources".length());
-				IvyPackageKey packageKey = new IvyPackageKey(organisation,name);
-				get(packages,packageKey).sources=r;
-			} else if( "javadoc".equals(a.getType()) ) {
+				
+			} else if( TypeUtils.javadoc(a) ) {
+				
 				if(name.endsWith("-javadoc"))
 					name = name.substring(0,name.length()-"-javadoc".length());
 				IvyPackageKey packageKey = new IvyPackageKey(organisation,name);
 				get(packages,packageKey).javadoc=r;
+				
 			}
 			
 		}

@@ -13,9 +13,9 @@ import org.apache.ivy.core.module.descriptor.Artifact;
 import org.apache.ivy.core.report.ArtifactDownloadReport;
 import org.apache.ivy.core.report.ResolveReport;
 
+import com.unicorntoast.ant.ivy.utils.TypeUtils;
+
 public abstract class ClasspathUtils {
-	
-	private static final String TYPE_JAR = "jar";
 
 	public static void store(String basepath, ResolveReport report, String output) throws IOException {
 		
@@ -25,7 +25,7 @@ public abstract class ClasspathUtils {
 			for(ArtifactDownloadReport r : report.getAllArtifactsReports())  {
 				Artifact a = r.getArtifact();
 				
-				if( TYPE_JAR.equals(a.getType()))
+				if( TypeUtils.jar(a) )
 					out.append(path(basepath,r)).append('\n');
 			}
 			
