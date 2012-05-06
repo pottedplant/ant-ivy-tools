@@ -2,6 +2,7 @@
 <project 
 	xmlns:eclipse="antlib:com.unicorntoast.ant.ivy.eclipse" 
 	xmlns:static="antlib:com.unicorntoast.ant.ivy.static_classpath" 
+	xmlns:export="antlib:com.unicorntoast.ant.ivy.export" 
 	default="help"
 	>
 
@@ -9,6 +10,7 @@
 
 	<taskdef uri="antlib:com.unicorntoast.ant.ivy.eclipse" classpath="${ant_ivy_tools_classpath}" /> 
 	<taskdef uri="antlib:com.unicorntoast.ant.ivy.static_classpath" classpath="${ant_ivy_tools_classpath}" /> 
+	<taskdef uri="antlib:com.unicorntoast.ant.ivy.export" classpath="${ant_ivy_tools_classpath}" /> 
 
 	<target name="help">
 
@@ -40,7 +42,7 @@
 
 	<target  name="update-deps">
 
-		<static:store settings="ivysettings.xml" input="ivy.xml" output="project.classpath" />
+		<export:export settings="ivysettings.xml" input="ivy.xml" classpath="project.classpath" output="libs" pathprefix="libs/" />
 
 		<eclipse:classpath >
 
