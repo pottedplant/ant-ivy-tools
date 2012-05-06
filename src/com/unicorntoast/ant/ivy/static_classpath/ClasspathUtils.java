@@ -13,38 +13,32 @@ import org.apache.ivy.core.module.descriptor.Artifact;
 import org.apache.ivy.core.report.ArtifactDownloadReport;
 import org.apache.ivy.core.report.ResolveReport;
 
+import com.unicorntoast.ant.ivy.utils.IvyPathUtils;
 import com.unicorntoast.ant.ivy.utils.TypeUtils;
 
 public abstract class ClasspathUtils {
 
-	public static void store(String basepath, ResolveReport report, String output) throws IOException {
-		
+	public static void store(String basepath, ResolveReport report, String output, String pathprefix) throws IOException {
+
 		OutputStreamWriter out = new OutputStreamWriter(new BufferedOutputStream(new FileOutputStream(output)));
 		try {
-			
+
 			for(ArtifactDownloadReport r : report.getAllArtifactsReports())  {
 				Artifact a = r.getArtifact();
-				
+
 				if( TypeUtils.jar(a) )
-					out.append(path(basepath,r)).append('\n');
+					out.append(IvyPathUtils.path(basepath,r,pathprefix)).append('\n');
 			}
-			
+
 		} finally {
 			out.close();
 		}
-		
-	}
 
-	private static CharSequence path(String basepath, ArtifactDownloadReport r) {
-		String path = r.getLocalFile().getAbsolutePath();
-		if( path.startsWith(basepath) )
-			path = path.substring(basepath.length());
-		return path;
 	}
 
 	public static ArrayList<String> load(String input) throws IOException {
 		ArrayList<String> result = new ArrayList<String>();
-		
+
 		BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(input)));
 		try {
 			String line;
