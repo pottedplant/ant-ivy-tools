@@ -1,17 +1,16 @@
 package com.unicorntoast.ant.ivy.eclipse;
 
+import com.unicorntoast.ant.ivy.utils.IvySettingsUtils;
+import com.unicorntoast.ant.ivy.utils.IvyUtils;
+import com.unicorntoast.ant.ivy.utils.Validate;
+import org.apache.tools.ant.BuildException;
+import org.apache.tools.ant.Task;
+
 import java.io.IOException;
 import java.io.PrintStream;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.apache.tools.ant.BuildException;
-import org.apache.tools.ant.Task;
-
-import com.unicorntoast.ant.ivy.utils.IvySettingsUtils;
-import com.unicorntoast.ant.ivy.utils.IvyUtils;
-import com.unicorntoast.ant.ivy.utils.Validate;
 
 public class GenerateClasspath extends Task {
 	
@@ -109,9 +108,9 @@ public class GenerateClasspath extends Task {
 			out.append("  <classpathentry");
 			
 			writeAttribute(out,"kind",kind);
-			writeAttribute(out,"path",path);
 			writeAttribute(out,"output",output);
-			
+			writeAttribute(out,"path",path);
+
 			out.append("/>\n");
 		}
 
