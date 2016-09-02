@@ -18,6 +18,7 @@ public class StoreClasspath extends Task {
 	private String output = Default.DEFAULT_CLASSPATH_FILE;
 	private String conf;
 	private String pathprefix;
+	private boolean offline;
 
 	// impl
 
@@ -40,7 +41,8 @@ public class StoreClasspath extends Task {
 						IvySettingsUtils.load(settings)
 					),
 					input,
-					conf
+					conf,
+					offline
 				),
 				output,
 				pathprefix
@@ -81,4 +83,7 @@ public class StoreClasspath extends Task {
 		this.pathprefix = pathprefix;
 	}
 
+	public void setOffline(boolean offline) {
+		this.offline = offline;
+	}
 }
