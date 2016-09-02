@@ -25,12 +25,15 @@ public abstract class IvyUtils {
 		return Ivy.newInstance();
 	}
 
-	public static ResolveReport resolve(Ivy ivy, String file, String conf) throws ParseException, IOException {
+	public static ResolveReport resolve(Ivy ivy, String file, String conf, boolean offline) throws ParseException, IOException {
 		
 		ResolveOptions opts = new ResolveOptions();
 		
 		if( conf!=null )
 			opts.setConfs(conf.split(","));
+
+		if(offline)
+			opts.setUseCacheOnly(true);
 		
 		ResolveReport report = ivy.resolve(new File(file).toURI().toURL(),opts);
 		

@@ -24,6 +24,7 @@ public class Export extends Task {
 	private String pathprefix;
 	private String pattern = "[organisation]-[module]-[type]-[artifact]-[revision].[ext]";
 	private boolean clean = false;
+	private boolean offline = false;
 
 	// impl
 
@@ -36,7 +37,7 @@ public class Export extends Task {
 		try {
 
 			Ivy ivy = IvyUtils.create(IvySettingsUtils.load(settings));
-			ResolveReport resolved = IvyUtils.resolve(ivy,input,conf);
+			ResolveReport resolved = IvyUtils.resolve(ivy,input,conf,offline);
 			
 			if( clean )
 				FileUtil.forceDelete(new File(output));
@@ -86,4 +87,7 @@ public class Export extends Task {
 		this.clean = clean;
 	}
 
+	public void setOffline(boolean offline) {
+		this.offline = offline;
+	}
 }

@@ -16,19 +16,19 @@ public class IvyPackageClasspathEntry implements ClasspathEntry {
 
 	@Override
 	public void write(PrintStream out) {
-		out.append("  <classpathentry kind=\"lib\" path=\"").append(IvyPathUtils.path(basepath,ivyPackage.jar)).append("\" ");
+		out.append("\t<classpathentry kind=\"lib\" path=\"").append(IvyPathUtils.path(basepath,ivyPackage.jar)).append("\"");
 
 		if( ivyPackage.sources!=null )
-			out.append(" sourcepath=\"").append(IvyPathUtils.path(basepath,ivyPackage.sources)).append("\" ");
+			out.append(" sourcepath=\"").append(IvyPathUtils.path(basepath,ivyPackage.sources)).append("\"");
 
 		if( ivyPackage.javadoc==null ) {
-			out.append(" />\n");
+			out.append("/>\n");
 			return;
 		}
 
 		out.append(">\n");
-		out.append("    <attributes><attribute name=\"javadoc_location\" value=\"").append(IvyPathUtils.path(basepath,ivyPackage.javadoc)).append("\" />").append("</attributes>\n");
-		out.append("  </classpathentry>\n");
+		out.append("\t\t<attributes>\n\t\t\t<attribute name=\"javadoc_location\" value=\"").append(IvyPathUtils.path(basepath,ivyPackage.javadoc)).append("\"/>\n").append("\t\t</attributes>\n");
+		out.append("\t</classpathentry>\n");
 	}
 
 }

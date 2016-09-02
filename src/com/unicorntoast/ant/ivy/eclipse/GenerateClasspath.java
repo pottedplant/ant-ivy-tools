@@ -20,6 +20,7 @@ public class GenerateClasspath extends Task {
 	private String output = ".classpath";
 	private String basedir;
 	private String conf;
+	private boolean offline = false;
 	private ArrayList<StreamContributor> contributors = new ArrayList<StreamContributor>();
 	
 	// impl
@@ -69,7 +70,8 @@ public class GenerateClasspath extends Task {
 								IvySettingsUtils.load(settings)
 							),
 							input,
-							conf
+							conf,
+							offline
 						)
 					);
 				
@@ -106,12 +108,12 @@ public class GenerateClasspath extends Task {
 
 		@Override
 		public void write(PrintStream out) throws IOException {
-			out.append("  <classpathentry");
+			out.append("\t<classpathentry");
 			
 			writeAttribute(out,"kind",kind);
-			writeAttribute(out,"path",path);
 			writeAttribute(out,"output",output);
-			
+			writeAttribute(out,"path",path);
+
 			out.append("/>\n");
 		}
 
@@ -148,5 +150,8 @@ public class GenerateClasspath extends Task {
 	public void setConf(String conf) {
 		this.conf = conf;
 	}
-	
+
+	public void setOffline(boolean offline) {
+		this.offline = offline;
+	}
 }
