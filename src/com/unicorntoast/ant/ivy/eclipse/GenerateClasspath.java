@@ -107,6 +107,7 @@ public class GenerateClasspath extends Task {
 		String kind;
 		String path;
 		String output;
+		boolean exported;
 
 		@Override
 		public void write(PrintStream out) throws IOException {
@@ -115,6 +116,8 @@ public class GenerateClasspath extends Task {
 			writeAttribute(out,"kind",kind);
 			writeAttribute(out,"output",output);
 			writeAttribute(out,"path",path);
+			if( exported )
+				writeAttribute(out,"exported","true");
 
 			out.append("/>\n");
 		}
@@ -135,6 +138,10 @@ public class GenerateClasspath extends Task {
 		
 		public void setOutput(String output) {
 			this.output = output;
+		}
+		
+		public void setExported(boolean exported) {
+			this.exported = exported;
 		}
 		
 	}
