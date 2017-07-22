@@ -20,6 +20,7 @@ public class GenerateClasspath extends Task {
 	private String output = ".classpath";
 	private String basedir;
 	private String conf;
+	private boolean exported = false;
 	private boolean offline = false;
 	private ArrayList<StreamContributor> contributors = new ArrayList<StreamContributor>();
 	
@@ -72,7 +73,8 @@ public class GenerateClasspath extends Task {
 							input,
 							conf,
 							offline
-						)
+						),
+						exported
 					);
 				
 				for(IvyPackageClasspathEntry e : classpath)
@@ -154,4 +156,9 @@ public class GenerateClasspath extends Task {
 	public void setOffline(boolean offline) {
 		this.offline = offline;
 	}
+	
+	public void setExported(boolean exported) {
+		this.exported = exported;
+	}
+	
 }

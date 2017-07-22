@@ -15,7 +15,7 @@ public abstract class ClasspathUtils {
 
 	private static final String ATTR_ORGANISATION = "organisation";
 
-	public static List<IvyPackageClasspathEntry> build(String basepath,ResolveReport report) {
+	public static List<IvyPackageClasspathEntry> build(String basepath,ResolveReport report,boolean exported) {
 		
 		ArrayList<IvyPackageClasspathEntry> result = new ArrayList<IvyPackageClasspathEntry>();
 		HashMap<IvyPackageKey, IvyPackage> packages = new HashMap<IvyPackageKey,IvyPackage>();
@@ -31,7 +31,7 @@ public abstract class ClasspathUtils {
 				IvyPackageKey packageKey = new IvyPackageKey(organisation,name);
 				IvyPackage ivyPackage = get(packages,packageKey);
 				ivyPackage.jar = r;
-				result.add(new IvyPackageClasspathEntry(basepath,ivyPackage));
+				result.add(new IvyPackageClasspathEntry(basepath,ivyPackage,exported));
 				
 			} else if( TypeUtils.source(a) ) {
 				
